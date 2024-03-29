@@ -14,10 +14,18 @@ class OnlineGameActivity extends Activity
     public function __construct(
         ActivityName $activityName,
         ActivityDescription $activityDescription,
-        ActivityType $activityType,
         OnlineGameActivityPlatform $onlineGameActivityPlatform
     ) {
         $this->onlineGameActivityPlatform = $onlineGameActivityPlatform;
-        parent::__construct($activityName, $activityDescription, $activityType);
+        parent::__construct(
+            $activityName,
+            $activityDescription,
+            ActivityType::instance(ActivityType::ONLINE_GAME_ACTIVITY_TYPE)
+        );
+    }
+
+    public function getPlatform(): OnlineGameActivityPlatform
+    {
+        return $this->onlineGameActivityPlatform;
     }
 }

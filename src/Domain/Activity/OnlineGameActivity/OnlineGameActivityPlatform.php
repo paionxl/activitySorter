@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity\OnlineGameActivity;
 
+use App\Exception\ActivitySorterException;
+
 class OnlineGameActivityPlatform
 {
     private string $name;
@@ -9,7 +11,7 @@ class OnlineGameActivityPlatform
     public function __construct(string $name)
     {
         if (empty($name)) {
-            throw new \Exception('Online game activity platform cannot be empty');
+            throw new ActivitySorterException('Online game activity platform cannot be empty');
         }
         $this->name = $name;
     }

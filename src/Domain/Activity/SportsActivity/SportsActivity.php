@@ -15,10 +15,18 @@ class SportsActivity extends Activity
     public function __construct(
         ActivityName $activityName,
         ActivityDescription $activityDescription,
-        ActivityType $activityType,
         SportsActivityType $sportsActivityType
     ) {
         $this->sportsActivityType = $sportsActivityType;
-        parent::__construct($activityName, $activityDescription, $activityType);
+        parent::__construct(
+            $activityName,
+            $activityDescription,
+            ActivityType::instance(ActivityType::SPORTS_ACTIVITY_TYPE)
+        );
+    }
+
+    public function getSportsActivityType(): SportsActivityType
+    {
+        return $this->sportsActivityType;
     }
 }

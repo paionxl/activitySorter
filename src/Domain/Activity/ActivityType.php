@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity;
 
+use App\Exception\ActivitySorterException;
+
 class ActivityType
 {
     private string $type;
@@ -9,9 +11,9 @@ class ActivityType
     /** @var ActivityType[] */
     private static array $instances = [];
 
-    public const ONLINE_GAME_ACTIVITY_TYPE = 0;
-    public const ADVENTURE_ACTIVITY_TYPE = 1;
-    public const SPORTS_ACTIVITY_TYPE = 2;
+    public const ONLINE_GAME_ACTIVITY_TYPE = 'online_game_activity';
+    public const ADVENTURE_ACTIVITY_TYPE = 'adventure_activity';
+    public const SPORTS_ACTIVITY_TYPE = 'sports_activity';
 
     private const ALLOWED_TYPES = [
         self::ONLINE_GAME_ACTIVITY_TYPE,
@@ -27,7 +29,7 @@ class ActivityType
     public static function instance(string $type): ActivityType
     {
         if (!\in_array($type, self::ALLOWED_TYPES)) {
-            throw new \Exception('Activity type not allowed: ' . $type);
+            throw new ActivitySorterException('Activity type not allowed: ' . $type);
         }
 
         if (!\array_key_exists($type, self::$instances)) {
@@ -40,5 +42,10 @@ class ActivityType
     public function getValue(): string
     {
         return $this->type;
+    }
+
+    public function equals(ActivityType $activityType): bool
+    {
+        return $this->type === $activityType->getValue();
     }
 }

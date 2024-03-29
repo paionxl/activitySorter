@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity;
 
+use App\Exception\ActivitySorterException;
+
 class ActivityDescription
 {
     private string $description;
@@ -9,7 +11,7 @@ class ActivityDescription
     public function __construct(string $description)
     {
         if (empty($description)) {
-            throw new \Exception('Activity description cannot be empty');
+            throw new ActivitySorterException('Activity description cannot be empty');
         }
         $this->description = $description;
     }

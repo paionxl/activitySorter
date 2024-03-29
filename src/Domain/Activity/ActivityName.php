@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity;
 
+use App\Exception\ActivitySorterException;
+
 class ActivityName
 {
     private string $name;
@@ -9,7 +11,7 @@ class ActivityName
     public function __construct(string $name)
     {
         if (empty($name)) {
-            throw new \Exception('Activity name cannot be empty');
+            throw new ActivitySorterException('Activity name cannot be empty');
         }
         $this->name = $name;
     }

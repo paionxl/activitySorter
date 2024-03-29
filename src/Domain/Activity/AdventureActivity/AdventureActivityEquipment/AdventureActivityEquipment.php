@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity\AdventureActivity\AdventureActivityEquipment;
 
+use App\Exception\ActivitySorterException;
+
 class AdventureActivityEquipment
 {
     private string $name;
@@ -9,7 +11,7 @@ class AdventureActivityEquipment
     public function __construct(string $name)
     {
         if (empty($name)) {
-            throw new \Exception('Adventure activity equipment name cannot be empty');
+            throw new ActivitySorterException('Adventure activity equipment name cannot be empty');
         }
         $this->name = $name;
     }

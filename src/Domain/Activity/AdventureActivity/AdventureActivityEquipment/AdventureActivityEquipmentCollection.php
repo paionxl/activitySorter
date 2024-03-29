@@ -27,4 +27,13 @@ class AdventureActivityEquipmentCollection
     {
         return $this->equipments;
     }
+
+    public static function createFromArray(array $equipments): AdventureActivityEquipmentCollection
+    {
+        $equipmentsToAdd = [];
+        foreach ($equipments as $equipment) {
+            $equipmentsToAdd[] = new AdventureActivityEquipment($equipment);
+        }
+        return new self($equipmentsToAdd);
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Domain\Activity\SportsActivity;
 
+use App\Exception\ActivitySorterException;
+
 class SportsActivityType
 {
     private string $type;
@@ -9,7 +11,7 @@ class SportsActivityType
     public function __construct(string $type)
     {
         if (empty($type)) {
-            throw new \Exception('Sports activity type cannot be empty');
+            throw new ActivitySorterException('Sports activity type cannot be empty');
         }
         $this->type = $type;
     }
