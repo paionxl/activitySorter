@@ -20,5 +20,22 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Infrastructure\Controller\Activity\AddActivityController:
+        arguments:
+            - {
+                adventure_activity : '@App\Application\Activity\AdventureActivity\Add\AddAdventureActivityService',
+                online_game_activity : '@App\Application\Activity\OnlineGameActivity\Add\AddOnlineGameActivityService',
+                sports_activity : '@App\Application\Activity\SportsActivity\Add\AddSportsActivityService'
+            }
+
+    App\Application\Activity\AdventureActivity\Add\AddAdventureActivityService:
+        arguments:
+            - '@App\Infrastructure\Repository\Activity\AdventureActivity\AdventureActivityRepositoryMySQL'
+
+    App\Application\Activity\OnlineGameActivity\Add\AddOnlineGameActivityService:
+        arguments:
+            - '@App\Infrastructure\Repository\Activity\OnlineGameActivity\OnlineGameActivityRepositoryMySQL'
+
+    App\Application\Activity\SportsActivity\Add\AddSportsActivityService:
+        arguments:
+            - '@App\Infrastructure\Repository\Activity\SportsActivity\SportsActivityRepositoryMySQL'

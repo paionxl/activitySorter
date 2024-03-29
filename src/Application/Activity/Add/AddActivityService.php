@@ -5,16 +5,17 @@ namespace App\Application\Activity\Add;
 use App\Domain\Activity\Activity;
 use App\Exception\ActivitySorterException;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryInterface;
+use App\Domain\Activity\ActivityType;
 
 abstract class AddActivityService implements AddActivityServiceInterface
 {
     private ActivityRepositoryInterface $activityRepository;
 
-    private string $serviceType;
+    private ActivityType $serviceType;
 
     public function __construct(
         ActivityRepositoryInterface $activityRepository,
-        string $serviceType
+        ActivityType $serviceType
     ) {
         $this->activityRepository = $activityRepository;
         $this->serviceType = $serviceType;
@@ -22,9 +23,10 @@ abstract class AddActivityService implements AddActivityServiceInterface
 
     public function add(AddActivityServiceRequest $addActivityServiceRequest): int
     {
-        if ($addActivityServiceRequest->getType() !== $this->serviceType) {
+        if (!ActivityType::instance($addActivityServiceRequest->getType())->equals($this->serviceType)) {
             throw new ActivitySorterException(
-                'Type not valid. Expected ' . $this->serviceType . ' and got ' . $addActivityServiceRequest->getType()
+                'Type not valid. Expected ' . $this->serviceType->getValue() .
+                ' and got ' . $addActivityServiceRequest->getType()
             );
         }
         $activity = $this->buildActivity($addActivityServiceRequest);
