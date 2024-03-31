@@ -27,6 +27,11 @@ abstract class Activity
         $this->activityId = $activityId;
     }
 
+    public function getId(): ActivityId
+    {
+        return $this->activityId;
+    }
+
     public function getActivityName(): ActivityName
     {
         return $this->activityName;

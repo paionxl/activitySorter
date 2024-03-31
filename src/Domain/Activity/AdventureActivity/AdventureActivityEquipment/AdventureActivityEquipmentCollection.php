@@ -9,6 +9,7 @@ class AdventureActivityEquipmentCollection
 
     public function __construct(array $equipments = [])
     {
+        $this->equipments = [];
         /** @var AdventureActivityEquipment $equipment */
         foreach ($equipments as $equipment) {
             $this->addEquipment($equipment);

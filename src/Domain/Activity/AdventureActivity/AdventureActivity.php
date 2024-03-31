@@ -7,7 +7,6 @@ use App\Domain\Activity\ActivityName;
 use App\Domain\Activity\ActivityType;
 use App\Domain\Activity\ActivityDescription;
 use App\Domain\Activity\AdventureActivity\AdventureActivityEquipment\AdventureActivityEquipmentCollection;
-use App\Exception\ActivitySorterException;
 
 class AdventureActivity extends Activity
 {

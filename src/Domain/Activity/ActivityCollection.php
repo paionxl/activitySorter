@@ -9,6 +9,7 @@ class ActivityCollection
 
     public function __construct(array $activities = [])
     {
+        $this->activities = [];
         /** @var Activity $activity */
         foreach ($activities as $activity) {
             $this->addActivity($activity);
@@ -26,5 +27,14 @@ class ActivityCollection
     public function getActivities(): array
     {
         return $this->activities;
+    }
+
+    public function addCollections(ActivityCollection $collection): ActivityCollection
+    {
+        foreach($collection->getActivities() as $activity) {
+            $this->addActivity($activity);
+        }
+
+        return $this;
     }
 }
