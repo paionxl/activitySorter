@@ -47,7 +47,6 @@ class AddActivityController extends AbstractController
         switch ($request->get('type')) {
             case 'adventure_activity':
                 $addActivityServiceRequest = new AddAdventureActivityServiceRequest(
-                    $request->get('type', ''),
                     $request->get('name', ''),
                     $request->get('description', ''),
                     $request->get('equipments', [])
@@ -55,7 +54,6 @@ class AddActivityController extends AbstractController
                 break;
             case 'online_game_activity':
                 $addActivityServiceRequest = new AddOnlineGameActivityServiceRequest(
-                    $request->get('type', ''),
                     $request->get('name', ''),
                     $request->get('description', ''),
                     $request->get('platform', '')
@@ -63,7 +61,6 @@ class AddActivityController extends AbstractController
                 break;
             case 'sports_activity':
                 $addActivityServiceRequest = new AddSportsActivityServiceRequest(
-                    $request->get('type', ''),
                     $request->get('name', ''),
                     $request->get('description', ''),
                     $request->get('sports_type', '')
