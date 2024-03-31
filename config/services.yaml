@@ -39,3 +39,20 @@ services:
     App\Application\Activity\SportsActivity\Add\AddSportsActivityService:
         arguments:
             - '@App\Infrastructure\Repository\Activity\SportsActivity\SportsActivityRepositoryMySQL'
+
+    App\Application\Activity\Find\FindActivitiesService:
+        arguments:
+            - {
+                adventure_activity : '@App\Infrastructure\Repository\Activity\AdventureActivity\AdventureActivityRepositoryMySQL',
+                online_game_activity : '@App\Infrastructure\Repository\Activity\OnlineGameActivity\OnlineGameActivityRepositoryMySQL',
+                sports_activity : '@App\Infrastructure\Repository\Activity\SportsActivity\SportsActivityRepositoryMySQL'
+            }
+            - '@App\Application\Activity\Adapter\ActivityCollectionAdapter'
+
+    App\Application\Activity\Adapter\ActivityCollectionAdapter:
+        arguments:
+            - {
+                adventure_activity : '@App\Application\Activity\AdventureActivity\Adapter\AdventureActivityAdapter',
+                online_game_activity : '@App\Application\Activity\OnlineGameActivity\Adapter\OnlineGameActivityAdapter',
+                sports_activity : '@App\Application\Activity\SportsActivity\Adapter\SportsActivityAdapter'
+            }

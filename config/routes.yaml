@@ -2,3 +2,8 @@ add_activity:
     path: /add
     controller: App\Infrastructure\Controller\Activity\AddActivityController::add
     methods: [POST]
+
+find_activities:
+    path: /find
+    controller: App\Infrastructure\Controller\Activity\FindActivitiesController::find
+    methods: [GET]
