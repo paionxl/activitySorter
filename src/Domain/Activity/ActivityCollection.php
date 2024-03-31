@@ -7,10 +7,11 @@ class ActivityCollection
     /** @var Activity[] */
     private array $activities;
 
+    /** @param Activity[] $activities */
     public function __construct(array $activities = [])
     {
         $this->activities = [];
-        /** @var Activity $activity */
+
         foreach ($activities as $activity) {
             $this->addActivity($activity);
         }
