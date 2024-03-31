@@ -3,7 +3,8 @@ version: '3.5'
 services:
     app:
         build: .
-        volumes: 
+        container_name: app
+        volumes:
             - ./:/app
         working_dir: /app
 
@@ -13,9 +14,10 @@ services:
             - 8000:80
         volumes:
             - ./nginx/conf.d/:/etc/nginx/conf.d/
-    
+
     db:
         image: mysql:5.7
+        container_name: db
         ports:
             - 3306:3306
         environment:
