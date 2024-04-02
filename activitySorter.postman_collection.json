@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "e613cf63-739d-4ef5-a19c-0e469cfc3a7d",
+		"name": "activitySorter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33757825"
+	},
+	"item": [
+		{
+			"name": "Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "an activity",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "a description",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "adventure_activity",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "equipments[]",
+							"value": "equipment 1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "equipments[]",
+							"value": "equipment 2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "online_game_activity",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "platform",
+							"value": "Steam",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "sports_activity",
+							"type": "text"
+						},
+						{
+							"key": "sports_type",
+							"value": "Intense",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/find?name=activity",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"find"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "activity"
+						},
+						{
+							"key": "description",
+							"value": "great",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "sports_activity",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "online_game_activity",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "adventure_activity",
+							"disabled": true
+						},
+						{
+							"key": "equipment",
+							"value": "equipment 1",
+							"disabled": true
+						},
+						{
+							"key": "platform",
+							"value": "steam",
+							"disabled": true
+						},
+						{
+							"key": "sports_type",
+							"value": "sea",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
