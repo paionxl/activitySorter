@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Activity\AdventureActivity\Repository;
+namespace App\Domain\Activity\SportsActivity\Repository;
 
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryCriteria;
 use App\Domain\Activity\SportsActivity\SportsActivityType;
