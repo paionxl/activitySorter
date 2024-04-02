@@ -48,6 +48,7 @@ services:
                 sports_activity : '@App\Infrastructure\Repository\Activity\SportsActivity\SportsActivityRepositoryMySQL'
             }
             - '@App\Application\Activity\Adapter\ActivityCollectionAdapter'
+            - '@App\Application\Activity\ActivityRepository\ActivityRepositoryCriteriaBuilder'
 
     App\Application\Activity\Adapter\ActivityCollectionAdapter:
         arguments:

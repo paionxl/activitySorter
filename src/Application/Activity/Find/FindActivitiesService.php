@@ -2,18 +2,12 @@
 
 namespace App\Application\Activity\Find;
 
-use App\Domain\Activity\ActivityType;
 use App\Exception\ActivitySorterException;
 use App\Domain\Activity\ActivityCollection;
-use App\Domain\Activity\SportsActivity\SportsActivityType;
 use App\Application\Activity\Adapter\ActivityCollectionAdapter;
-use App\Domain\Activity\ActivityRepository\ActivityRepositoryCriteria;
-use App\Domain\Activity\OnlineGameActivity\OnlineGameActivityPlatform;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryInterface;
-use App\Domain\Activity\AdventureActivity\Repository\SportsActivityRepositoryCriteria;
-use App\Domain\Activity\AdventureActivity\Repository\AdventureActivityRepositoryCriteria;
-use App\Domain\Activity\AdventureActivity\Repository\OnlineGameActivityRepositoryCriteria;
-use App\Domain\Activity\AdventureActivity\AdventureActivityEquipment\AdventureActivityEquipment;
+use App\Application\Activity\ActivityRepository\ActivityRepositoryCriteriaBuilder;
+use App\Application\Activity\ActivityRepository\ActivityRepositoryCriteriaBuilderRequest;
 
 class FindActivitiesService implements FindActivitiesServiceInterface
 {
@@ -22,10 +16,16 @@ class FindActivitiesService implements FindActivitiesServiceInterface
 
     private ActivityCollectionAdapter $activityCollectionAdapter;
 
-    public function __construct(array $repositories, ActivityCollectionAdapter $activityCollectionAdapter)
-    {
+    private ActivityRepositoryCriteriaBuilder $activityRepositoryCriteriaBuilder;
+
+    public function __construct(
+        array $repositories,
+        ActivityCollectionAdapter $activityCollectionAdapter,
+        ActivityRepositoryCriteriaBuilder $activityRepositoryCriteriaBuilder
+    ) {
         $this->repositories = $repositories;
         $this->activityCollectionAdapter = $activityCollectionAdapter;
+        $this->activityRepositoryCriteriaBuilder = $activityRepositoryCriteriaBuilder;
     }
 
     public function find(FindActivitiesServiceRequest $findActivitiesServiceRequest): FindActivitiesServiceResponse
@@ -48,7 +48,9 @@ class FindActivitiesService implements FindActivitiesServiceInterface
         foreach ($repositories as $type => $repository) {
             $activities = $activities->addCollections(
                 $repository->findByCriteria(
-                    $this->buildCriteria($type, $findActivitiesServiceRequest)
+                    $this->activityRepositoryCriteriaBuilder->build(
+                        $this->createBuilderRequest($type, $findActivitiesServiceRequest)
+                    )
                 )
             );
         }
@@ -57,52 +59,30 @@ class FindActivitiesService implements FindActivitiesServiceInterface
         return $response;
     }
 
-    private function buildCriteria(
+    private function createBuilderRequest(
         string $type,
         FindActivitiesServiceRequest $findActivitiesServiceRequest
-    ): ActivityRepositoryCriteria {
-        switch ($type) {
-            case ActivityType::ADVENTURE_ACTIVITY_TYPE:
-                $criteria = new AdventureActivityRepositoryCriteria();
-                if ($findActivitiesServiceRequest->hasEquipment()) {
-                    $criteria->setEquipment(
-                        new AdventureActivityEquipment($findActivitiesServiceRequest->getEquipment())
-                    );
-                }
+    ): ActivityRepositoryCriteriaBuilderRequest {
 
-                break;
-            case ActivityType::ONLINE_GAME_ACTIVITY_TYPE:
-                $criteria = new OnlineGameActivityRepositoryCriteria();
-                if ($findActivitiesServiceRequest->hasPlatform()) {
-                    $criteria->setPlatform(
-                        new OnlineGameActivityPlatform($findActivitiesServiceRequest->getPlatform())
-                    );
-                }
+        $activityRepositoryCriteriaBuilderRequest = new ActivityRepositoryCriteriaBuilderRequest();
 
-                break;
-            case ActivityType::SPORTS_ACTIVITY_TYPE:
-                $criteria = new SportsActivityRepositoryCriteria();
-                if ($findActivitiesServiceRequest->hasSportsType()) {
-                    $criteria->setSportsActivityType(
-                        new SportsActivityType($findActivitiesServiceRequest->getSportsType())
-                    );
-                }
-
-                break;
-            default:
-                throw new ActivitySorterException(
-                    'Type to find not supported: ' . $findActivitiesServiceRequest->getType()
-                );
+        if ($findActivitiesServiceRequest->hasEquipment()) {
+            $activityRepositoryCriteriaBuilderRequest->setEquipment($findActivitiesServiceRequest->getEquipment());
         }
-
+        if ($findActivitiesServiceRequest->hasPlatform()) {
+            $activityRepositoryCriteriaBuilderRequest->setPlatform($findActivitiesServiceRequest->getPlatform());
+        }
+        if ($findActivitiesServiceRequest->hasSportsType()) {
+            $activityRepositoryCriteriaBuilderRequest->setSportsType($findActivitiesServiceRequest->getSportsType());
+        }
         if ($findActivitiesServiceRequest->hasName()) {
-            $criteria->setName($findActivitiesServiceRequest->getName());
+            $activityRepositoryCriteriaBuilderRequest->setName($findActivitiesServiceRequest->getName());
         }
-
         if ($findActivitiesServiceRequest->hasDescription()) {
-            $criteria->setDescription($findActivitiesServiceRequest->getDescription());
+            $activityRepositoryCriteriaBuilderRequest->setDescription($findActivitiesServiceRequest->getDescription());
         }
 
-        return $criteria;
+        $activityRepositoryCriteriaBuilderRequest->setType($type);
+        return $activityRepositoryCriteriaBuilderRequest;
     }
 }
