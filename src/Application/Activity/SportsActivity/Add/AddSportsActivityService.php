@@ -7,10 +7,10 @@ use App\Domain\Activity\ActivityName;
 use App\Domain\Activity\ActivityType;
 use App\Domain\Activity\ActivityDescription;
 use App\Application\Activity\Add\AddActivityService;
-use App\Domain\Activity\AdventureActivity\SportsActivity;
+use App\Domain\Activity\SportsActivity\SportsActivity;
+use App\Domain\Activity\SportsActivity\SportsActivityType;
 use App\Application\Activity\Add\AddActivityServiceRequest;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryInterface;
-use App\Domain\Activity\SportsActivity\SportsActivityType;
 
 class AddSportsActivityService extends AddActivityService
 {

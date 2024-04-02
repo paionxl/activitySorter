@@ -9,11 +9,11 @@ use App\Domain\Activity\ActivityType;
 use Doctrine\DBAL\ArrayParameterType;
 use App\Domain\Activity\ActivityCollection;
 use App\Domain\Activity\ActivityDescription;
-use App\Domain\Activity\AdventureActivity\SportsActivity;
+use App\Domain\Activity\SportsActivity\SportsActivity;
 use App\Domain\Activity\SportsActivity\SportsActivityType;
 use App\Infrastructure\Repository\Activity\ActivityRepositoryMySQL;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryCriteria;
-use App\Domain\Activity\AdventureActivity\Repository\SportsActivityRepositoryCriteria;
+use App\Domain\Activity\SportsActivity\Repository\SportsActivityRepositoryCriteria;
 
 class SportsActivityRepositoryMySQL extends ActivityRepositoryMySQL
 {

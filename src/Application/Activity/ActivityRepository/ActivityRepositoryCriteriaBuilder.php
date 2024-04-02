@@ -7,9 +7,9 @@ use App\Exception\ActivitySorterException;
 use App\Domain\Activity\SportsActivity\SportsActivityType;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryCriteria;
 use App\Domain\Activity\OnlineGameActivity\OnlineGameActivityPlatform;
-use App\Domain\Activity\AdventureActivity\Repository\SportsActivityRepositoryCriteria;
+use App\Domain\Activity\SportsActivity\Repository\SportsActivityRepositoryCriteria;
 use App\Domain\Activity\AdventureActivity\Repository\AdventureActivityRepositoryCriteria;
-use App\Domain\Activity\AdventureActivity\Repository\OnlineGameActivityRepositoryCriteria;
+use App\Domain\Activity\OnlineGameActivity\Repository\OnlineGameActivityRepositoryCriteria;
 use App\Domain\Activity\AdventureActivity\AdventureActivityEquipment\AdventureActivityEquipment;
 
 class ActivityRepositoryCriteriaBuilder

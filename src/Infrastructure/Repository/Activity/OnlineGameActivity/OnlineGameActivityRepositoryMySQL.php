@@ -13,7 +13,7 @@ use App\Domain\Activity\OnlineGameActivity\OnlineGameActivity;
 use App\Infrastructure\Repository\Activity\ActivityRepositoryMySQL;
 use App\Domain\Activity\ActivityRepository\ActivityRepositoryCriteria;
 use App\Domain\Activity\OnlineGameActivity\OnlineGameActivityPlatform;
-use App\Domain\Activity\AdventureActivity\Repository\OnlineGameActivityRepositoryCriteria;
+use App\Domain\Activity\OnlineGameActivity\Repository\OnlineGameActivityRepositoryCriteria;
 
 class OnlineGameActivityRepositoryMySQL extends ActivityRepositoryMySQL
 {

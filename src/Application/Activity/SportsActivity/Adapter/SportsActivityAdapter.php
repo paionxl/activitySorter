@@ -4,7 +4,7 @@ namespace App\Application\Activity\SportsActivity\Adapter;
 
 use App\Domain\Activity\Activity;
 use App\Application\Activity\Adapter\ActivityAdapter;
-use App\Domain\Activity\AdventureActivity\SportsActivity;
+use App\Domain\Activity\SportsActivity\SportsActivity;
 
 class SportsActivityAdapter extends ActivityAdapter
 {
